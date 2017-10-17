@@ -3,23 +3,29 @@ from bs4 import BeautifulSoup
 import re
 import ssl
 
-f = open('actualdatab.html', 'r')
-html_doc = f.read()
-f.close()
-
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-soup = BeautifulSoup(html_doc, 'html.parser')
+urllst = []
+url = input('Enter - ')
+link = 0
 
-urls = soup.find_all('a')
-url_list = []
-for x in range(7):
-    for url in urls:
-        if url == urls[17]:
-            url = url.get('href')
-            new_url = urlopen(url)
-            print(urls.text)
-    
+while link < 7:
+    taglst = []
+    #html = urllib.request.urlopen(url).read()
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    tags = soup('a')
 
+    for i in range(8):
+        for tag in tags:
+            taglst.append(tag)
+
+    url = taglst[17].get('href', None)
+    urllst.append(url)
+
+    link += 1
+
+answer = re.findall('by_([^ ]*).html', url)
+print (answer[0])
