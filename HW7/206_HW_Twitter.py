@@ -67,7 +67,7 @@ api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 ## 		statement shown in class.
 
 
-CACHE_FNAME = 'tweets_cache.json'
+CACHE_FNAME = 'tweets_cache.json' #creating JSON file for cache
 try:
     cache_file = open(CACHE_FNAME, 'r') # Try to read the data from the file
     cache_contents = cache_file.read()  # If it's there, get it into a string
@@ -81,17 +81,17 @@ except:
 ## 		so it either gets new data or caches data, depending upon what the input
 ##		to search for is.
 
-# used cache_example.py for guidance
+#used cache_example.py for guidance
 def getTweetsWithCaching(tweet):
     tweet_identifier = 'twitter_{}'.format(tweet)
 
-    if tweet_identifier in CACHE_DICTION:
+    if tweet_identifier in CACHE_DICTION: #to use cache
         return CACHE_DICTION[tweet_identifier]
     else:
         print ('fetching')
         public_tweets = api.search(q = tweet)
         CACHE_DICTION[tweet_identifier] = public_tweets
-        CACHE_DUMP = json.dumps(CACHE_DICTION) #make JSON format
+        CACHE_DUMP = json.dumps(CACHE_DICTION) #JSON format
         fw = open(CACHE_FNAME, 'w')
         fw.write(CACHE_DUMP)
         fw.close
@@ -101,8 +101,8 @@ def getTweetsWithCaching(tweet):
 ## 3. Using a loop, invoke your function, save the return value in a variable, and explore the
 ##		data you got back!
 
-for x in range(3):
-    tweet = input('Enter Tweet term: ')
+for x in range(3): #loop 3 times
+    tweet = input('Enter Tweet term: ') #prompts user to enter term
     data = getTweetsWithCaching(tweet)
     tweet_info = data['statuses']
     # print (tweet_info)
@@ -111,7 +111,7 @@ for x in range(3):
 ##		text of each tweet in the big nested structure -- write code to print out
 ## 		content from 5 tweets, as shown in the linked example.
 
-for tweet in tweet_info[:5]: #index for only 5
-        print ('TEXT:', tweet['text'])
-        print ('CREATED AT:', tweet['created_at'])
+for tweet in tweet_info[:5]: #content from 5 tweets
+        print ('TEXT:', tweet['text']) #format to match linked example
+        print ('CREATED AT:', tweet['created_at']) #format to match linked example
         print ('\n')
