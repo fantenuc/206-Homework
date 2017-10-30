@@ -79,12 +79,37 @@ except:
 ## 		so it either gets new data or caches data, depending upon what the input
 ##		to search for is.
 
+# used cache_example.py for guidance
+def getTweetsWithCaching(tweet):
+    tweet_identifier = 'twitter_{}'.format(tweet)
+
+    if tweet_identifier in CACHE_DICTION:
+        return CACHE_DICTION[tweet_identifier]
+    else:
+        print ('fetching')
+        public_tweets = api.search(q = tweet)
+        CACHE_DICTION[tweet_identifier] = public_tweets
+        CACHE_DUMP = json.dumps(CACHE_DICTION) #make JSON format
+        fw = open(CACHE_FNAME, 'w')
+        fw.write(CACHE_DUMP)
+        fw.close
+        return public_tweets
 
 
 ## 3. Using a loop, invoke your function, save the return value in a variable, and explore the
 ##		data you got back!
 
+for x in range(3):
+    tweet = input('Enter Tweet term: ')
+    data = getTweetsWithCaching(tweet)
+    tweet_info = data['statuses']
+    # print (tweet_info)
 
 ## 4. With what you learn from the data -- e.g. how exactly to find the
 ##		text of each tweet in the big nested structure -- write code to print out
 ## 		content from 5 tweets, as shown in the linked example.
+
+for tweet in tweet_info[:5]: #index for only 5
+        print ('TEXT:', tweet['text'])
+        print ('CREATED AT:', tweet['created_at'])
+        print ('\n')
