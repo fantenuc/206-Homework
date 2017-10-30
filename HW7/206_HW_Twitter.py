@@ -105,7 +105,7 @@ for x in range(3): #loop 3 times
     tweet = input('Enter Tweet term: ') #prompts user to enter term
     data = getTweetsWithCaching(tweet)
     tweet_info = data['statuses']
-    # print (tweet_info)
+    # print (tweet_info) #print tweet data with term lookup
 
 ## 4. With what you learn from the data -- e.g. how exactly to find the
 ##		text of each tweet in the big nested structure -- write code to print out
