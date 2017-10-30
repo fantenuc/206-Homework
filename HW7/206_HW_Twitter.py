@@ -7,7 +7,7 @@ import twitter_info # file created containing consumer_key, consumer_secret, acc
 ## SI 206 - HW
 ## COMMENT WITH:
 ## Your section day/time: Wednesday 6-7pm
-## Any names of people you worked with on this assignment:
+## Any names of people you worked with on this assignment: Alexander Shell
 
 
 ## Write code that uses the tweepy library to search for tweets with three different phrases of the
@@ -66,7 +66,14 @@ api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 ## 1. Set up the caching pattern start -- the dictionary and the try/except
 ## 		statement shown in class.
 
-
+CACHE_FNAME = 'tweets_cache.json'
+try:
+    cache_file = open(CACHE_FNAME, 'r') # Try to read the data from the file
+    cache_contents = cache_file.read()  # If it's there, get it into a string
+    CACHE_DICTION = json.loads(cache_contents) # And then load it into a dictionary
+    cache_file.close() # Close the file, we're good, we got the data in a dictionary.
+except:
+    CACHE_DICTION = {}
 
 ## 2. Write a function to get twitter data that works with the caching pattern,
 ## 		so it either gets new data or caches data, depending upon what the input
