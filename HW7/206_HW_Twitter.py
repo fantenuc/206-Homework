@@ -87,14 +87,14 @@ def getTweetsWithCaching(tweet):
 
     if tweet_identifier in CACHE_DICTION: #to use cache
         return CACHE_DICTION[tweet_identifier]
-    else:
-        print ('fetching')
-        public_tweets = api.search(q = tweet)
+
+    else: #if not in cache
+        print ('fetching...')
+        public_tweets = api.search(tweet)
         CACHE_DICTION[tweet_identifier] = public_tweets
-        CACHE_DUMP = json.dumps(CACHE_DICTION) #JSON format
         fw = open(CACHE_FNAME, 'w')
-        fw.write(CACHE_DUMP)
-        fw.close
+        fw.write(json.dumps(CACHE_DICTION, indent = 2))
+        fw.close() #close the open file
         return public_tweets
 
 
