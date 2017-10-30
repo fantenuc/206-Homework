@@ -7,11 +7,7 @@ import twitter_info # file created containing consumer_key, consumer_secret, acc
 ## SI 206 - HW
 ## COMMENT WITH:
 ## Your section day/time: Wednesday 6-7pm
-<<<<<<< HEAD:HW7/206_HW_Twitter.py
 ## Any names of people you worked with on this assignment: Alexander Shell
-=======
-## Any names of people you worked with on this assignment:
->>>>>>> d27ad7b6eab7f4e47ca76188745ebe9c5db50156:HW7/206_HW_Twitter.py
 
 
 ## Write code that uses the tweepy library to search for tweets with three different phrases of the
